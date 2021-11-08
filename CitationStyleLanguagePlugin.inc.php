@@ -316,7 +316,9 @@ class CitationStyleLanguagePlugin extends GenericPlugin {
 		$citationData = new stdClass();
 		$citationData->type = 'article-journal';
 		$citationData->id = $article->getId();
-		$citationData->title = $publication->getLocalizedFullTitle();
+		//Modification ici pour supprimer les balises HTML si présente dans le titre
+        $citationData->title = strip_tags($publication->getLocalizedFullTitle());
+		//$citationData->title = $publication->getLocalizedFullTitle();
 		$citationData->{'container-title'} = $context->getLocalizedName();
 		$citationData->{'publisher-place'} = $this->getSetting($context->getId(), 'publisherLocation');
 		$citationData->abstract = htmlspecialchars($publication->getLocalizedData('abstract'));
